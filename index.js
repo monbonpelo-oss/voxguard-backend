@@ -3,17 +3,8 @@ const app = express();
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("VoxGuard backend is running");
-});
-
-app.get("/api/health", (req, res) => {
-  res.json({
-    status: "ok",
-    message: "API working",
-    timestamp: new Date()
-  });
-});
+const healthRoute = require("./routes/health");
+app.use("/api/health", healthRoute);
 
 const PORT = process.env.PORT || 3000;
 
