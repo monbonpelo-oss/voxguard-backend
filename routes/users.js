@@ -1,8 +1,13 @@
 const express = require("express");
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.json({ message: "Users route working" });
+const authMiddleware = require("../middleware/authMiddleware");
+
+router.get("/", authMiddleware, (req, res) => {
+  res.json({
+    message: "Protected route success",
+    user: req.user
+  });
 });
 
 module.exports = router;
